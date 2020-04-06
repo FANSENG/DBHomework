@@ -44,12 +44,13 @@ CREATE TABLE Purchase(
     BookISBN char(13) FOREIGN KEY REFERENCES BookData(BookISBN),
     Amount int NOT NULL,
     BookPrice money NOT NULL,
+    PurchaseData DateTime NOT NULL DEFAULT GETDATE(),
     PRIMARY KEY (PurchaseID, BookISBN)
 )
 
 --3.建销售表
 CREATE TABLE Sell(
-    SellData DateTime NOT NULL,
+    SellData DateTime NOT NULL DEFAULT GETDATE(),
     BookISBN char(13) Not NULL FOREIGN KEY REFERENCES BookData(BookISBN),
     SellPrice money NOT NULL
 )
@@ -69,7 +70,7 @@ CREATE TABLE BookData(
 --5.建充值表
 CREATE TABLE Recharge(
     RechargeID char(10) PRIMARY KEY,
-    RechargeDate DateTime NOT NULL,
+    RechargeDate DateTime NOT NULL DEFAULT GETDATE(),
     memberID char(8) NOT NULL FOREIGN KEY REFERENCES memberData(memberID),
     RechargeMoney money NOT NULL
 )
@@ -78,7 +79,8 @@ CREATE TABLE Recharge(
 CREATE TABLE Compensate(
     BookISBN char(13) NOT NULL FOREIGN KEY REFERENCES BookData(BookISBN),
     memberID char(8) NOT NULL FOREIGN KEY REFERENCES memberData(memberID),
-    CompensateMoney money NOT NULL
+    CompensateMoney money NOT NULL,
+    CompensateData DateTime NOT NULL DEFAULT GETDATE(),
 )
 
 --7.建租借表
@@ -86,7 +88,31 @@ CREATE TABLE Lease(
     LeaseID char(10) PRIMARY KEY,
     memberID char(8) FOREIGN KEY REFERENCES memberData(memberID),
     BookISBN char(13) Foreign KEY REFERENCES BookData(BookISBN),
-    LeaseData DateTime NOT NULL,
+    LeaseData DateTime NOT NULL DEFAULT GETDATE(),
     WhetherLeaseRenew nchar(1) CHECK(WhetherLeaseRenew in (N'是', N'否'))
 )
+--endregion
+
+--region 三、创建视图、添加索引
+
+--region 1.视图
+-- 会员拓展视图(会员账号、总充值金额、现租借图书数量)
+-- 逾期未归还图书视图(姓名、手机号、书籍名、应还日期)
+-- 库存过少书籍(书记账号、书名、库存数量、全新数量)
+-- 本月销售清单(日期、书籍号码、销售金额)
+
+
+
+--endregion
+
+--region 2.索引
+
+--endregion
+
+--endregion
+
+
+--region 四、创建触发器、存储过程、函数
+
+
 --endregion
