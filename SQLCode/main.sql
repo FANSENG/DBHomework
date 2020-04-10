@@ -20,10 +20,10 @@ GO
 --region 二、建表
 USE bookStoreDB
 
---会员信息：（会员账号，姓名，手机号，余额，冻结余额）
---进货订单：（进货单号，书籍号码，进货数量，单价）
+--会员信息：（会员账号，姓名，手机号，余额，冻结余额，会员状态）
+--进货订单：（进货单号，书籍号码，进货数量，单价，进货日期）
 --销售清单：（日期，书籍号码，销售金额）
---书籍信息：（书籍号码，书名，类别，作者，书籍照片，照片格式，库存数量, 全新数量）
+--书籍信息：（书籍号码，书名，类别，作者，书籍照片，照片格式，库存数量, 全新数量，当前售价）
 --充值记录：（充值单号,日期，会员账号，充值金额）
 --赔偿记录：（书籍号码，会员账号，赔偿金额，赔偿日期）
 --租借记录：（租借号，会员账号，书籍号码，租借日期，是否续租，是否归还，应还日期）
@@ -34,13 +34,14 @@ CREATE TABLE memberData(
     memberName nvarchar(10) Not NULL,
     memberPhoneNumber char(11) UNIQUE,
     memberOverage money DEFAULT 0,
-    memberFreezeOverage money DEFAULT 0
+    memberFreezeOverage money DEFAULT 0,
+    memberState nvarchar(2) check(memberState IN (N'正常',N'注销'))
 )
 
 --2.建进货表
 CREATE TABLE Purchase(
     PurchaseID char(6),
-    BookISBN char(13) FOREIGN KEY REFERENCES BookData(BookISBN),
+    BookISBN char(13) FOREIGN KEY REFERENCES BookData(BookISBN) ON UPDATE CASCADE,
     Amount int NOT NULL,
     BookPrice money NOT NULL,
     PurchaseData DateTime NOT NULL DEFAULT GETDATE(),
@@ -50,7 +51,7 @@ CREATE TABLE Purchase(
 --3.建销售表
 CREATE TABLE Sell(
     SellDate DateTime NOT NULL DEFAULT GETDATE(),
-    BookISBN char(13) Not NULL FOREIGN KEY REFERENCES BookData(BookISBN),
+    BookISBN char(13) Not NULL FOREIGN KEY REFERENCES BookData(BookISBN) ON UPDATE CASCADE,
     SellPrice money NOT NULL
 )
 
@@ -63,7 +64,8 @@ CREATE TABLE BookData(
     BookPicture image,
     PictureFormat nvarchar(5),
     BookNum int NOT NULL,
-    BrandNewBookNum int NOT NULL
+    BrandNewBookNum int NOT NULL,
+    BookPrice money NOT NULL,
 )
 
 --5.建充值表
@@ -76,7 +78,7 @@ CREATE TABLE Recharge(
 
 --6.建赔偿表
 CREATE TABLE Compensate(
-    BookISBN char(13) NOT NULL FOREIGN KEY REFERENCES BookData(BookISBN),
+    BookISBN char(13) NOT NULL FOREIGN KEY REFERENCES BookData(BookISBN) ON UPDATE CASCADE,
     memberID char(8) NOT NULL FOREIGN KEY REFERENCES memberData(memberID),
     CompensateMoney money NOT NULL,
     CompensateData DateTime NOT NULL DEFAULT GETDATE(),
@@ -86,7 +88,7 @@ CREATE TABLE Compensate(
 CREATE TABLE Lease(
     LeaseID char(10) PRIMARY KEY,
     memberID char(8) FOREIGN KEY REFERENCES memberData(memberID),
-    BookISBN char(13) Foreign KEY REFERENCES BookData(BookISBN),
+    BookISBN char(13) Foreign KEY REFERENCES BookData(BookISBN) ON UPDATE CASCADE,
     LeaseData DateTime NOT NULL DEFAULT GETDATE(),
     WhetherLeaseRenew nchar(1) CHECK(WhetherLeaseRenew in (N'是', N'否')),
     WhetherReturn nchar(1) CHECK(WhetherReturn in (N'是', N'否')),
@@ -106,7 +108,7 @@ CREATE TABLE Lease(
 --region 1.会员拓展视图
 create view memberView as
     select A.memberID, AllRechargeMoney, BorrowingBook
-    from (select memberData.memberID, sum(RechargeMoney) AllRechargeMoney from memberData, Recharge where memberData.memberID = Recharge.memberID group by memberData.memberID) as A,
+    from (select memberData.memberID, sum(RechargeMoney) AllRechargeMoney from memberData, Recharge where memberData.memberID = Recharge.memberID and memberData.memberState=N'正常' group by memberData.memberID) as A,
          (select memberData.memberID, count(LeaseID) BorrowingBook from memberData, Lease where memberData.memberID = Lease.memberID and Lease.WhetherReturn = N'否' group by memberData.memberID) as B
     where A.memberID = B.memberID
 --endregion
@@ -118,6 +120,7 @@ create view OverdueBook as
     where memberData.memberID = Lease.memberID
     and Lease.BookISBN = BookData.BookISBN
     and 0>DATEDIFF(day,GETDATE(), Lease.DueDate)
+    and memberData.memberState=N'正常'
 --endregion
 
 --region 3.库存过少图书
@@ -150,6 +153,14 @@ create view LeaseView as
     where WhetherReturn=N'否'
     and memberData.memberID = Lease.memberID
     and Lease.BookISBN=BookData.BookISBN
+--endregion
+
+--region 7.图书拓展视图
+create view BookView as
+    select A.BookISBN, A.BookName,A.BookCategory,A.BookAuthor,A.BookNum,A.BrandNewBookNum,A.BookPrice,A.SellCount,B.LeaseCount
+    from (select BookData.BookISBN, BookData.BookName,BookData.BookCategory,BookData.BookAuthor,BookData.BookNum,BookData.BrandNewBookNum,BookData.BookPrice,count(*) SellCount from BookData,Sell where BookData.BookISBN = Sell.BookISBN group by BookData.BookISBN,BookName,BookNum,BookCategory,BookAuthor,BrandNewBookNum,BookPrice) A,
+         (select BookData.BookISBN,count(*) LeaseCount from BookData,Lease where BookData.BookISBN=Lease.BookISBN group by BookData.BookISBN) B
+    where A.BookISBN=B.BookISBN
 --endregion
 
 --endregion
@@ -220,11 +231,41 @@ on Lease(BookISBN)
 
 --endregion
 
---region 五、创建触发器、存储过程、函数
+--会员信息：（会员账号，姓名，手机号，余额，冻结余额，会员状态）
+--进货订单：（进货单号，书籍号码，进货数量，单价，进货日期）
+--销售清单：（日期，书籍号码，销售金额）
+--书籍信息：（书籍号码，书名，类别，作者，书籍照片，照片格式，库存数量, 全新数量，当前售价）
+--充值记录：（充值单号,日期，会员账号，充值金额）
+--赔偿记录：（书籍号码，会员账号，赔偿金额，赔偿日期）
+--租借记录：（租借号，会员账号，书籍号码，租借日期，是否续租，是否归还，应还日期）
 
+--region 五、创建触发器
 -- 触发器：审核、数据同步功能，当写入某个数据时检查数据是否合理，是否与其他数据冲突、且同步其他表中数据
--- 存储过程：对某些功能进行封装， 避免了程序和数据库通信时传输大量代码
+
+--endregion
+
+--region 六、创建函数
 -- 函数：必须有返回值、用来拓展标准SQL语句，可以嵌入SQL语句中
+--1.
+
+--endregion
+
+--region 七、存储过程
+-- 存储过程：对某些功能进行封装， 避免了程序和数据库通信时传输大量代码
+--1.获得某一时间段销售记录
+--2.通过手机号获得某会员租借记录
+--3.通过会员ID获得某会员租借记录
+--4.通过手机号获得某会员赔偿记录
+--5.通过会员ID获得某会员赔偿记录
+--6.通过手机号获得某会员充值记录
+--7.通过会员ID获得某会员充值记录
+--8.获得某一时间段进货清单
+--9.根据某一进货单号获得具体进货信息
+--10.根据图书号码获得某一图书具体销售信息
+--11.根据图书名获得匹配到的所有图书
+--12.根据作者名获得匹配到的所有图书
+--13.根据类别获得匹配到的所有图书
+--14.根据会员名获得匹配到的所有会员
 
 
 --endregion
