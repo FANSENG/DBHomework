@@ -34,7 +34,7 @@ CREATE TABLE memberData(
     memberName nvarchar(10) Not NULL,
     memberPhoneNumber char(11) UNIQUE Not Null,
     memberOverage money DEFAULT 0 check(memberOverage >= 0) Not Null,
-    memberFreezeOverage money DEFAULT 0 check(memberOverage >= 0) Not Null,
+    memberFreezeOverage money DEFAULT 0 check(memberFreezeOverage >= 0) Not Null,
     memberState nvarchar(2) check(memberState IN (N'正常',N'注销')) DEFAULT N'正常' Not Null,
     Remarks nvarchar(max) DEFAULT NULL
 )
@@ -99,7 +99,7 @@ CREATE TABLE Lease(
     LeaseDate DateTime NOT NULL DEFAULT GETDATE(),
     WhetherLeaseRenew nchar(1) CHECK(WhetherLeaseRenew in (N'是', N'否')) DEFAULT N'否',
     WhetherReturn nchar(1) CHECK(WhetherReturn in (N'是', N'否')) DEFAULT N'否',
-    DueDate DateTime NOT NULL DEFAULT DATEADD(day,30,GETDATE()) check(DATEDIFF(day,LeaseDate,DueDate)>0),
+    DueDate DateTime NOT NULL DEFAULT DATEADD(day,30,GETDATE()) check(DATEDIFF(day,GETDATE(),DueDate)>0),
     Remarks nvarchar(max) DEFAULT NULL
 )
 --endregion
@@ -116,6 +116,7 @@ CREATE TABLE Lease(
 -- 8.销售拓展视图(日期、书籍号码、书名、类别、销售数量、销售金额)
 
 --region 1.会员拓展视图
+GO
 create view memberView as
     select A.memberID, AllRechargeMoney, BorrowingBook
     from (select memberData.memberID, sum(RechargeMoney) AllRechargeMoney from memberData, Recharge where memberData.memberID = Recharge.memberID and memberData.memberState=N'正常' group by memberData.memberID) as A,
@@ -124,6 +125,7 @@ create view memberView as
 --endregion
 
 --region 2.逾期未归还图书视图
+GO
 create view OverdueBook as
     select LeaseID,memberName,memberPhoneNumber,BookName,LeaseDate,WhetherLeaseRenew,DueDate
     from memberData,Lease,BookData
@@ -134,6 +136,7 @@ create view OverdueBook as
 --endregion
 
 --region 3.库存过少图书
+GO
 create view LowInventory as
     select BookISBN, BookName, BookNum,BrandNewBookNum
     from BookData
@@ -142,6 +145,7 @@ create view LowInventory as
 --endregion
 
 ---region 4.本月销售清单
+GO
 create view ThisMonthSSalesList as
     select SellDate,BookData.BookISBN,BookData.BookName,BookData.BookCategory,SellPrice
     from Sell,BookData
@@ -150,6 +154,7 @@ create view ThisMonthSSalesList as
 --endregion
 
 --region 5.进货简化视图
+GO
 create view PurchaseView as
     select PurchaseID,sum(Amount) sumCount,PurchaseDate,sum(Amount*BookPrice) sumMoney
     from Purchase
@@ -157,6 +162,7 @@ create view PurchaseView as
 --endregion
 
 --region 6.未归还图书视图
+GO
 create view LeaseView as
     select LeaseID,memberName,memberPhoneNumber,BookName,LeaseDate,WhetherLeaseRenew,DueDate
     from Lease, memberData, BookData
@@ -166,6 +172,7 @@ create view LeaseView as
 --endregion
 
 --region 7.图书拓展视图
+GO
 create view BookView as
     select A.BookISBN, A.BookName,A.BookCategory,A.BookAuthor,A.BookNum,A.BrandNewBookNum,A.BookPrice,A.SellCount,B.LeaseCount
     from (select BookData.BookISBN, BookData.BookName,BookData.BookCategory,BookData.BookAuthor,BookData.BookNum,BookData.BrandNewBookNum,BookData.BookPrice,sum(Sell.SellNum) SellCount from BookData,Sell where BookData.BookISBN = Sell.BookISBN group by BookData.BookISBN,BookName,BookNum,BookCategory,BookAuthor,BrandNewBookNum,BookPrice) A,
@@ -174,6 +181,7 @@ create view BookView as
 --endregion
 
 --region 8.销售拓展视图
+GO
 create view SellView as
     select SellDate,BookData.BookISBN,BookData.BookName,BookData.BookCategory,SellNum,SellPrice
     from Sell,BookData
