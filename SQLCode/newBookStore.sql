@@ -199,12 +199,14 @@ create view LeaseView as
 --region 7.图书拓展视图
 GO
 create view BookView as
-    select A.BookISBN, A.BookName,A.BookCategory,A.BookAuthor,A.BookNum,A.BrandNewBookNum,A.BookPrice,A.SellCount SellCount,(B.LeaseCount+C.LeaseCount) LeaseCount, C.AtStoreCount
+    select A.BookISBN, A.BookName,A.BookCategory,A.BookAuthor,A.BookNum,A.BrandNewBookNum,A.BookPrice,A.SellCount SellCount,(B.LeaseCount+C.LeaseCount) LeaseCount, D.AtStoreCount
     from (select BookData.BookISBN, BookData.BookName,BookData.BookCategory,BookData.BookAuthor,BookData.BookNum,BookData.BrandNewBookNum,BookData.BookPrice,sum(Sell.SellNum) SellCount from BookData,Sell where BookData.BookISBN = Sell.BookISBN group by BookData.BookISBN,BookName,BookNum,BookCategory,BookAuthor,BrandNewBookNum,BookPrice) A,
          (select BookData.BookISBN,count(*) LeaseCount from BookData,Lease,Items where BookData.BookISBN=Items.BookISBN and Items.BookID = Lease.BookID group by BookData.BookISBN) B,
-         (select BookData.BookISBN,count(*) LeaseCount, count(BookStatus = N'在店') AtStoreCount from BookData,Returns,Items where BookData.BookISBN=Items.BookISBN and Items.BookID = Returns.BookID group by BookData.BookISBN) C
+         (select BookData.BookISBN,count(*) LeaseCount from BookData,Returns,Items where BookData.BookISBN=Items.BookISBN and Items.BookID = Returns.BookID group by BookData.BookISBN) C,
+         (select BookData.BookISBN,count(*) AtStoreCount from BookData,Returns,Items where BookData.BookISBN=Items.BookISBN and BookStatus = N'在店' group by BookData.BookISBN) D
     where A.BookISBN=B.BookISBN
     and B.BookISBN=C.BookISBN
+    and C.BookISBN=D.BookISBN
 --endregion
 
 --region 8.销售拓展视图
@@ -310,7 +312,7 @@ on Returns(MemberID)
 --4.插入销售清单时修改全新数量
 --5.插入进货订单时修改全新数量
 --6.插入充值记录时修改会员信息
---7.插入赔偿记录时修改书籍库存信息
+--7.插入赔偿记录时修改书籍库存信息、冻结金额和余额，并删除租借图书记录，修改Items状态
 
 --region 1.修改续租状态时修改应还日期
 Go
@@ -479,7 +481,7 @@ as
     end
 --endregion
 
---region 7.插入赔偿记录时修改书籍库存信息、冻结金额和余额，并删除租借图书记录
+--region 7.插入赔偿记录时修改书籍库存信息、冻结金额和余额，并删除租借图书记录，修改Items状态
 Go
 CREATE TRIGGER insertCompensateData
 on Compensate
@@ -503,6 +505,10 @@ as
         set memberOverage -= @CompensationMoney,
             memberFreezeOverage -= @CompensationMoney
         where memberData.memberID = @memberID
+
+        update ITEMS
+        set BookStatus = N'已丢失'
+        where @BookID = Items.BookID
 
         delete from Lease
         where Lease.memberID = @memberID
@@ -562,6 +568,7 @@ as
 --endregion
 
 --region 4.获得下一个Items的ID
+Go
 Create Function getNextID(@BookISBN char(13))
 returns char(7)
 as
@@ -911,7 +918,7 @@ begin
         update BookData set BrandNewBookNum -= @Count - @NowCount where BookISBN = @BookISBN
         while @NowCount > @Count
         begin
-            set @BookID = getNextID(@BookISBN)
+            set @BookID = dbo.getNextID(@BookISBN)
             insert into Items(BookID,BookISBN)
             Values (@BookID,@BookISBN)
         end
