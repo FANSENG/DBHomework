@@ -1,0 +1,318 @@
+﻿<Window x:Class="BookStore.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookStore"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+       
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="5*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Button x:Name="buttonMemberManage" Content="会员管理" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Height="70.067" Grid.Row="0" d:LayoutOverrides="TopMargin, BottomMargin" Click="button_click_MainButton"/>
+        <Button x:Name="buttonBookLease" Content="图书租借" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Margin="0.267,0,0,0" Height="70.066" Grid.Row="1" Click="button_click_MainButton"/>
+        <Button x:Name="buttonBookSell" Content="图书销售" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Width="132" Height="70.067" Click="button_click_MainButton"/>
+        <Button x:Name="buttonPurchaseManage" Content="进货管理" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Width="132" Height="70.067" Click="button_click_MainButton"/>
+        <Button x:Name="buttonFinanceManage" Content="财务管理" HorizontalAlignment="Left" Margin="0,0,0,-0.001" Grid.Row="4" VerticalAlignment="Top" Width="132" Height="70.067" Click="button_click_MainButton"/>
+        <Button x:Name="ButtonSearchBook" Content="搜索图书" Margin="0,0.001,0.267,1.4" Grid.Row="5" Click="button_click_MainButton"/>
+
+        <!--欢迎面板-->
+        <DockPanel x:Name="WelcomePanel" Grid.Column="1" Grid.Row="0" Grid.RowSpan="6" HorizontalAlignment="Left" Height="419" LastChildFill="False" Margin="5,0,0,0" VerticalAlignment="Top" Width="657" Visibility="Visible">
+            <DockPanel.Background>
+                <ImageBrush ImageSource="WelcomeBackGr.jpg"/>
+            </DockPanel.Background>
+            <TextBlock x:Name="TextBlockWelcome" DockPanel.Dock="Top" Height="127" TextWrapping="Wrap" Text="欢迎使用书籍租借与销售管理系统！" VerticalAlignment="Top" Width="657" Background="{x:Null}" Foreground="#FFC2EA71" FontSize="48" FontFamily="Script MT Bold"/>
+            <WrapPanel x:Name="WelcomeCenterPanel" Height="292" VerticalAlignment="Top" Width="656" Margin="0,-0.2,0,0">
+                <DockPanel x:Name="WelcomeTodaySellPanel" Height="292" Width="328">
+                    <TextBlock x:Name="TextBlockTodaySell" DockPanel.Dock="Top" Height="292" TextWrapping="Wrap" Text="最近销售" VerticalAlignment="Center" FontSize="24" HorizontalAlignment="Center"/>
+                    <DataGrid x:Name="DataGridWelcomeSell" Height="250.8" VerticalAlignment="Top" Width="326.8" Margin="0,-250.8,0,0" RenderTransformOrigin="0.5,0.5" ItemsSource="{Binding}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="书名" Width="82.6" Binding="{Binding BookName}" />
+                            <DataGridTextColumn Header="数量" Width="82.6" Binding="{Binding Count}" />
+                            <DataGridTextColumn Header="售价" Width="82.6" Binding="{Binding Price}" />
+                            <DataGridTextColumn Header="时间" Width="82.6" Binding="{Binding SellDate}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+                <DockPanel x:Name="WelcomeTodayLeasePanel" Height="292" Width="328">
+                    <TextBlock x:Name="TextBlockTodayLease" DockPanel.Dock="Top" Height="292" TextWrapping="Wrap" Text="最近租借" VerticalAlignment="Center" FontSize="24" HorizontalAlignment="Center"/>
+                    <DataGrid x:Name="DataGridWelcomeLease" Height="250.8" VerticalAlignment="Top" Width="326.8" Margin="0,-250.8,0,0" RenderTransformOrigin="0.5,0.5" ItemsSource="{Binding}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="书名" Width="125.4" Binding="{Binding BookName}"/>
+                            <DataGridTextColumn Header="租借时间" Width="125.4" Binding="{Binding LeaseDate}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </WrapPanel>
+        </DockPanel>
+
+        <!--会员管理面板-->
+        <DockPanel x:Name="MemberManagePanel" Grid.Column="1" Grid.Row="0" Grid.RowSpan="6" HorizontalAlignment="Left" Height="419" LastChildFill="False" Margin="5,0,0,0" VerticalAlignment="Top" Width="657" Visibility="Collapsed">
+            <!--搜索栏-->
+            <StackPanel x:Name="StackPanelSearchMember" DockPanel.Dock="Top" Width="654.4" Height="37.4" VerticalAlignment="Top" Margin="-1.5,3.3,0,0" HorizontalAlignment="Left" Orientation="Horizontal">
+                <TextBlock x:Name="TextBlockSearchMemberName" TextWrapping="Wrap" Text="会员姓名:" Height="34.44" Width="80.8" FontSize="18" VerticalAlignment="Center" Margin="0,8,0,0"/>
+                <TextBox x:Name="TextBoxSearchMamberName" TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="0,0,0,1.48"/>
+                <TextBlock x:Name="TextBlockSearchMemberID" TextWrapping="Wrap" Text="会员ID:" FontSize="18" Margin="0,8,0,0"/>
+                <TextBox x:Name="TextBoxSearchMemberID" TextWrapping="Wrap" Text="" Width="120" VerticalContentAlignment="Center"/>
+                <TextBlock x:Name="TextBlockSearchPhoneNum" TextWrapping="Wrap" Text="手机号:" FontSize="18" Margin="0,8,0,0"/>
+                <TextBox x:Name="TextBoxSearchPhoneNum" TextWrapping="Wrap" Width="120" VerticalContentAlignment="Center"/>
+                <Button x:Name="ButtonSearchMember" Content="搜索" Width="96.6" Margin="5,0,10,0"/>
+            </StackPanel>
+            <!--右侧按钮-->
+            <StackPanel x:Name="StackPanelMemberManageButton" DockPanel.Dock="Right" Width="100">
+                <Button x:Name="ButtonViewMemberData" Content="查看详情信息" Height="70" Margin="5,15,10,10"/>
+                <Button x:Name="ButtonAlterMemberData" Content="修改信息" Height="70" Margin="5,15,10,10"/>
+                <Button x:Name="ButtonLogoutMember" Content="注销" Height="70" Margin="5,15,10,10"/>
+                <Button x:Name="ButtonAddMember" Content="添加" Height="70" Margin="5,15,10,10"/>
+            </StackPanel>
+            <DataGrid x:Name="dataGrid" Width="552.4" Margin="0,5,0,0" ItemsSource="{Binding}" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="姓名" Width="110.48" Binding="{Binding Path=MemberName}"/>
+                    <DataGridTextColumn Header="会员ID" Width="110.48" Binding="{Binding Path=name}"/>
+                    <DataGridTextColumn Header="手机号" Width="110.48" Binding="{Binding Path=name}"/>
+                    <DataGridTextColumn Header="注册时间" Width="110.48" Binding="{Binding Path=name}"/>
+                    <DataGridTextColumn Header="余额" Width="110.48" Binding="{Binding Path=name}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!--搜索结果-->
+
+        </DockPanel>
+
+        <!--图书租借面板-->
+        <DockPanel x:Name="BookLeasePanel" Grid.Column="1" Grid.Row="0" Grid.RowSpan="6" HorizontalAlignment="Left" Height="400" LastChildFill="False" Margin="10,10,0,0" VerticalAlignment="Top" Width="642" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="42" Margin="10,0,0,0">
+                <TextBlock x:Name="TextBlockLeaseBookName" TextWrapping="Wrap" Text="书名：" Margin="0,10.07,0,9.07" FontSize="18" HorizontalAlignment="Center" d:LayoutOverrides="Height"/>
+                <TextBox x:Name="TextBoxLeaseBookName" TextWrapping="Wrap" Width="100" FontSize="18" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TextBlockLeaseItemID" TextWrapping="Wrap" Text="书籍ID：" VerticalAlignment="Center" FontSize="18" Margin="10,0,0,0"/>
+                <TextBox x:Name="TextBoxLeaseItemID" TextWrapping="Wrap" Width="100" VerticalAlignment="Center" FontSize="18"/>
+                <TextBlock x:Name="TextBlockLeaseBookClasses" TextWrapping="Wrap" Text="会员号：" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBox x:Name="TextBoxLeaseMemberID" TextWrapping="Wrap" Width="100" VerticalAlignment="Center" FontSize="18"/>
+                <Button x:Name="ButtonLeaseBookSearch" Content="搜索" Width="75" Margin="10,0,0,0"/>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Right" Width="100">
+                <TextBlock x:Name="TextBlockLeaseBookMemberID" TextWrapping="Wrap" Text="会员号" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,30,0,0" FontSize="18"/>
+                <TextBox x:Name="TextBoxLeaseBookMemberID" Height="23" TextWrapping="Wrap" Margin="0" FontSize="18"/>
+                <Button x:Name="ButtonLease" Content="租借" Margin="0,30,0,0" Height="35"/>
+                <Button x:Name="ButtonRenew" Content="续借" Margin="0,30,0,0" Height="35"/>
+                <Button x:Name="ButtonReturn" Content="归还" Margin="0,30,0,0" Height="35"/>
+                <Button x:Name="ButtonCompensation" Content="赔偿" Margin="0,30,0,0" Height="35"/>
+            </StackPanel>
+            <DataGrid x:Name="dataGrid1" Width="536.8" Margin="0,5,0,0" ItemsSource="{Binding}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="书名" Width="134.2" Binding="{Binding Path=BookName}"/>
+                    <DataGridTextColumn Header="作者" Width="134.2" Binding="{Binding Path=BookAuthor}"/>
+                    <DataGridTextColumn Header="书籍ID" Width="134.2" Binding="{Binding Path=ItemID}"/>
+                    <DataGridTextColumn Header="状态" Width="134.2" Binding="{Binding Path=BookState}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+
+        <!--图书销售面板-->
+        <DockPanel x:Name="BookSellPanel" Grid.Column="1" Grid.Row="0" Grid.RowSpan="6" HorizontalAlignment="Left" Height="400" LastChildFill="False" Margin="10,10,0,0" VerticalAlignment="Top" Width="642" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="42" Margin="10,0,0,0">
+                <TextBlock x:Name="TextBlockSellBookName" TextWrapping="Wrap" Text="书名：" Margin="0,10.07,0,9.07" FontSize="18" HorizontalAlignment="Center" d:LayoutOverrides="Height"/>
+                <TextBox x:Name="TextBoxSellBookName" TextWrapping="Wrap" Width="70" FontSize="18" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TextBlockSellBookISBN" TextWrapping="Wrap" Text="ISBN：" VerticalAlignment="Center" FontSize="18" Margin="10,0,0,0"/>
+                <TextBox x:Name="TextBoxSellBookISBN" TextWrapping="Wrap" Width="70" VerticalAlignment="Center" FontSize="18"/>
+                <TextBlock x:Name="TextBlockSellBookAuthor" TextWrapping="Wrap" Text="作者：" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBox x:Name="TextBoxSellBookAuthor" TextWrapping="Wrap" Width="70" VerticalAlignment="Center" FontSize="18"/>
+                <TextBlock x:Name="TextBlockSellBookClasses" TextWrapping="Wrap" Text="类别：" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <ComboBox x:Name="ComboBoxSellBookClasses" SelectedIndex="0" Width="70" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <ComboBoxItem Content="所有"/>
+                    <ComboBoxItem Content="哲学"/>
+                    <ComboBoxItem Content="社会"/>
+                    <ComboBoxItem Content="法律"/>
+                    <ComboBoxItem Content="军事"/>
+                    <ComboBoxItem Content="经济"/>
+                    <ComboBoxItem Content="教育"/>
+                    <ComboBoxItem Content="语言"/>
+                    <ComboBoxItem Content="文学"/>
+                    <ComboBoxItem Content="艺术"/>
+                    <ComboBoxItem Content="历史"/>
+                    <ComboBoxItem Content="地理"/>
+                    <ComboBoxItem Content="数理"/>
+                    <ComboBoxItem Content="工业"/>
+                    <ComboBoxItem Content="医学"/>
+                    <ComboBoxItem Content="天文"/>
+                </ComboBox>
+                <Button x:Name="ButtonSellBookSearch" Content="搜索" Width="75" Margin="10,0,0,0"/>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Right" Width="100">
+                <Button x:Name="ButtonSell" Content="销售" Margin="0,150,8,0" Height="56.44"/>
+            </StackPanel>
+            <DataGrid x:Name="dataGridSell" Width="536.8" Margin="0,5,0,0" ItemsSource="{Binding}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="书名" Width="107.36" Binding="{Binding Path=BookName}"/>
+                    <DataGridTextColumn Header="作者" Width="107.36" Binding="{Binding Path=BookAuthor}"/>
+                    <DataGridTextColumn Header="ISBN" Width="107.36" Binding="{Binding Path=BookISBN}"/>
+                    <DataGridTextColumn Header="价格" Width="107.36" Binding="{Binding Path=BookPrice}"/>
+                    <DataGridTextColumn Header="库存数量" Width="107.36" Binding="{Binding Path=BookCount}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+
+        <!--进货管理面板-->
+        <DockPanel x:Name="PurchaseManagePanel" Grid.Column="1" Grid.Row="0" Grid.RowSpan="6" HorizontalAlignment="Left" Height="400" LastChildFill="False" Margin="10,10,0,0" VerticalAlignment="Top" Width="642" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="42" Margin="10,0,0,0">
+                <TextBlock x:Name="TextBlockPurchaseBookName" TextWrapping="Wrap" Text="书名：" Margin="0,10.07,0,9.07" FontSize="18" HorizontalAlignment="Center" d:LayoutOverrides="Height"/>
+                <TextBox x:Name="TextBoxPurchaseBookName" TextWrapping="Wrap" Width="70" FontSize="18" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TextBlockPurchaseBookISBN" TextWrapping="Wrap" Text="ISBN：" VerticalAlignment="Center" FontSize="18" Margin="10,0,0,0"/>
+                <TextBox x:Name="TextBoxPurchaseBookISBN" TextWrapping="Wrap" Width="70" VerticalAlignment="Center" FontSize="18"/>
+                <TextBlock x:Name="TextBlockPurchaseBookAuthor" TextWrapping="Wrap" Text="作者：" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBox x:Name="TextBoxPurchaseBookAuthor" TextWrapping="Wrap" Width="70" VerticalAlignment="Center" FontSize="18"/>
+                <TextBlock x:Name="TextBlockPurchaseBookClasses" TextWrapping="Wrap" Text="类别：" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <ComboBox x:Name="ComboBoxPurchaseBookClasses" SelectedIndex="0" Width="70" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <ComboBoxItem Content="所有"/>
+                    <ComboBoxItem Content="哲学"/>
+                    <ComboBoxItem Content="社会"/>
+                    <ComboBoxItem Content="法律"/>
+                    <ComboBoxItem Content="军事"/>
+                    <ComboBoxItem Content="经济"/>
+                    <ComboBoxItem Content="教育"/>
+                    <ComboBoxItem Content="语言"/>
+                    <ComboBoxItem Content="文学"/>
+                    <ComboBoxItem Content="艺术"/>
+                    <ComboBoxItem Content="历史"/>
+                    <ComboBoxItem Content="地理"/>
+                    <ComboBoxItem Content="数理"/>
+                    <ComboBoxItem Content="工业"/>
+                    <ComboBoxItem Content="医学"/>
+                    <ComboBoxItem Content="天文"/>
+                </ComboBox>
+                <Button x:Name="ButtonPurchaseBookSearch" Content="搜索" Width="75" Margin="10,0,0,0"/>
+            </StackPanel>
+            <DataGrid x:Name="DataGridPurchase" Width="539.2" Margin="0,5,0,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="书名" Width="107.36" Binding="{Binding Path=BookName}"/>
+                    <DataGridTextColumn Header="作者" Width="107.36" Binding="{Binding Path=BookAuthor}"/>
+                    <DataGridTextColumn Header="ISBN" Width="107.36" Binding="{Binding Path=BookISBN}"/>
+                    <DataGridTextColumn Header="价格" Width="107.36" Binding="{Binding Path=BookPrice}"/>
+                    <DataGridTextColumn Header="库存数量" Width="107.36" Binding="{Binding Path=BookCount}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Width="100" DockPanel.Dock="Right">
+                <TextBlock x:Name="TextBlockPurchaseNum" TextWrapping="Wrap" Text="入库数量" HorizontalAlignment="Center" FontSize="18" Margin="0,70,0,0"/>
+                <TextBox x:Name="TextBoxPurchaseNum" Height="23" TextWrapping="Wrap" FontSize="18"/>
+                <Button x:Name="ButtonPurchase" Content="入库" Height="67.24" Margin="5,70,0,0"/>
+            </StackPanel>
+        </DockPanel>
+
+        <!--财务管理面板-->
+        <DockPanel x:Name="FinanceManagePanel" Grid.Column="1" Grid.Row="0" Grid.RowSpan="6" HorizontalAlignment="Left" Height="400" LastChildFill="False" Margin="10,10,0,0" VerticalAlignment="Top" Width="642" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top" Height="43.6" Orientation="Horizontal">
+                <TextBlock x:Name="TextBlockFinanceTime" TextWrapping="Wrap" Text="时间：" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                <ComboBox x:Name="ComboBoxDataRange" SelectedIndex="0" Width="200" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <ComboBoxItem Content="--请选择日期--" Visibility="Collapsed"/>
+                    <Calendar SelectionMode="SingleRange"/>
+                </ComboBox>
+                <Button x:Name="ButtonSearchSell" Content="查看销售" Width="60" Margin="30,0,0,0"/>
+                <Button x:Name="ButtonSearchLease" Content="查看租借" Width="60" Margin="30,0,0,0"/>
+                <Button x:Name="ButtonSearchCompensation" Content="查看赔偿" Width="60" Margin="30,0,0,0"/>
+                <Button x:Name="ButtonSearchPurchase" Content="查看进货" Width="60" Margin="30,0,0,0"/>
+            </StackPanel>
+            <DataGrid x:Name="DataGridFinanceSell" Width="640" Margin="0,0,0,0" Visibility="Collapsed">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="书名" Width="128" Binding="{Binding Path=BookName}"/>
+                    <DataGridTextColumn Header="销售时间" Width="128" Binding="{Binding Path=SellDate}"/>
+                    <DataGridTextColumn Header="售价" Width="128" Binding="{Binding Path=SellPrice}"/>
+                    <DataGridTextColumn Header="销售数量" Width="128" Binding="{Binding Path=SellNum}"/>
+                    <DataGridTextColumn Header="备注" Width="128" Binding="{Binding Path=Remarks}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid x:Name="DataGridFinanceLease" Width="640" Margin="0,5,0,0" Visibility="Collapsed">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="租借号" Width="91.4" Binding="{Binding Path=LeaseID}"/>
+                    <DataGridTextColumn Header="书籍ID" Width="91.4" Binding="{Binding Path=BookName}"/>
+                    <DataGridTextColumn Header="会员号" Width="91.4" Binding="{Binding Path=MemberID}"/>
+                    <DataGridTextColumn Header="租借时间" Width="91.4" Binding="{Binding Path=LeaseDate}"/>
+                    <DataGridTextColumn Header="归还时间" Width="91.4" Binding="{Binding Path=ReturnData}"/>
+                    <DataGridTextColumn Header="租借金额" Width="91.4" Binding="{Binding Path=SellNum}"/>
+                    <DataGridTextColumn Header="备注" Width="91.4" Binding="{Binding Path=Remarks}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid x:Name="DataGridFinanceCompensation" Width="640" Margin="0,5,0,0" Visibility="Collapsed">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="书籍ID" Width="128" Binding="{Binding Path=BookName}"/>
+                    <DataGridTextColumn Header="会员号" Width="128" Binding="{Binding Path=MemberID}"/>
+                    <DataGridTextColumn Header="赔偿日期" Width="128" Binding="{Binding Path=CompensateDate}"/>
+                    <DataGridTextColumn Header="赔偿金额" Width="128" Binding="{Binding Path=CompensateMoeny}"/>
+                    <DataGridTextColumn Header="备注" Width="128" Binding="{Binding Path=Remarks}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid x:Name="DataGridFinancePurchase" Width="640" Margin="0,5,0,0" Visibility="Visible">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="进货单号" Width="106.6" Binding="{Binding Path=PruchaseID}"/>
+                    <DataGridTextColumn Header="书名" Width="106.6" Binding="{Binding Path=BookName}"/>
+                    <DataGridTextColumn Header="进货日期" Width="106.6" Binding="{Binding Path=PurchaDate}"/>
+                    <DataGridTextColumn Header="书籍进价" Width="106.6" Binding="{Binding Path=BookPrice}"/>
+                    <DataGridTextColumn Header="进货数量" Width="106.6" Binding="{Binding Path=Amount}"/>
+                    <DataGridTextColumn Header="备注" Width="106.6" Binding="{Binding Path=Remarks}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </DockPanel>
+        
+        <!--搜索图书面板-->
+        <DockPanel x:Name="SearchBookPanel" Grid.Column="1" Grid.Row="0" Grid.RowSpan="6" HorizontalAlignment="Left" Height="400" LastChildFill="False" Margin="10,10,0,0" VerticalAlignment="Top" Width="642" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="42" Margin="10,0,0,0">
+                <TextBlock x:Name="TextBlockSearchBookName" TextWrapping="Wrap" Text="书名：" Margin="0,10.07,0,9.07" FontSize="18" HorizontalAlignment="Center" d:LayoutOverrides="Height"/>
+                <TextBox x:Name="TextBoxSearchBookName" TextWrapping="Wrap" Width="70" FontSize="18" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TextBlockSearchBookISBN" TextWrapping="Wrap" Text="ISBN：" VerticalAlignment="Center" FontSize="18" Margin="10,0,0,0"/>
+                <TextBox x:Name="TextBoxSearchBookISBN" TextWrapping="Wrap" Width="70" VerticalAlignment="Center" FontSize="18"/>
+                <TextBlock x:Name="TextBlockSearchBookAuthor" TextWrapping="Wrap" Text="作者：" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBox x:Name="TextBoxSearchBookAuthor" TextWrapping="Wrap" Width="70" VerticalAlignment="Center" FontSize="18"/>
+                <TextBlock x:Name="TextBlockSearchBookClasses" TextWrapping="Wrap" Text="类别：" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <ComboBox x:Name="ComboBoxSearchBookClasses" SelectedIndex="0" Width="70" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <ComboBoxItem Content="所有"/>
+                    <ComboBoxItem Content="哲学"/>
+                    <ComboBoxItem Content="社会"/>
+                    <ComboBoxItem Content="法律"/>
+                    <ComboBoxItem Content="军事"/>
+                    <ComboBoxItem Content="经济"/>
+                    <ComboBoxItem Content="教育"/>
+                    <ComboBoxItem Content="语言"/>
+                    <ComboBoxItem Content="文学"/>
+                    <ComboBoxItem Content="艺术"/>
+                    <ComboBoxItem Content="历史"/>
+                    <ComboBoxItem Content="地理"/>
+                    <ComboBoxItem Content="数理"/>
+                    <ComboBoxItem Content="工业"/>
+                    <ComboBoxItem Content="医学"/>
+                    <ComboBoxItem Content="天文"/>
+                </ComboBox>
+                <Button x:Name="ButtonSearchBookSearch" Content="搜索" Width="75" Margin="10,0,0,0"/>
+            </StackPanel>
+            <!--双击查看详情信息-->
+            <DataGrid x:Name="DataGridSearch" Width="642.4" Margin="0,5,0,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="书名" Width="107.36" Binding="{Binding Path=BookName}"/>
+                    <DataGridTextColumn Header="作者" Width="107.36" Binding="{Binding Path=BookAuthor}"/>
+                    <DataGridTextColumn Header="ISBN" Width="107.36" Binding="{Binding Path=BookISBN}"/>
+                    <DataGridTextColumn Header="价格" Width="107.36" Binding="{Binding Path=BookPrice}"/>
+                    <DataGridTextColumn Header="库存数量" Width="107.36" Binding="{Binding Path=BookCount}"/>
+                    <DataGridTextColumn Header="类别" Width="107.36" Binding="{Binding Path=BookCount}"/>
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu x:Name="ContextMenuSearchBook" StaysOpen="True">
+                        <MenuItem x:Name="MenuItemCheckBook" Header="查看" Click="MenuItemCheckBook_Click"/>
+                        <MenuItem x:Name="MenuItemAddBook" Header="添加" Click="MenuItemCheckBook_Click"/>
+                        <MenuItem x:Name="MenuItemDeleteBook" Header="删除" Click="MenuItemCheckBook_Click"/>
+                        <MenuItem x:Name="MenuItemAlterBook" Header="修改" Click="MenuItemCheckBook_Click"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+        </DockPanel>
+    
+    </Grid>
+</Window>

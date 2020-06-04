@@ -1,0 +1,38 @@
+﻿<Window x:Class="BookStore.MemberDetailedSurface.MemberData"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookStore.MemberDetailedSurface"
+        mc:Ignorable="d"
+        Title="MemberData" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="textBlockMemberID" FontSize="18" Grid.Column="0" Grid.Row="0" Margin="0,14.62,0,10" TextWrapping="Wrap" Text="会员号:" d:LayoutOverrides="Width, Height"/>
+        <TextBlock x:Name="textBlockMemberName" FontSize="18" Grid.Column="0" Grid.Row="1" Margin="0,14.62,0,10" TextWrapping="Wrap" Text="会员名:" d:LayoutOverrides="Width, Height"/>
+        <TextBlock x:Name="textBlockMemberPhoneNum" FontSize="14" Grid.Column="0" Grid.Row="2" Margin="0,14.62,0,10" TextWrapping="Wrap" Text="会员手机号:" d:LayoutOverrides="Width, Height"/>
+        <TextBlock x:Name="textBlockMemberOverage" FontSize="18" Grid.Column="0" Grid.Row="3" Margin="0,14.62,0,10" TextWrapping="Wrap" Text="账户余额:" d:LayoutOverrides="Width, Height"/>
+        <TextBlock x:Name="textBlockMemberFreezeOverage" FontSize="12" Grid.Column="2" Grid.Row="0" Margin="0,14.62,0,10" TextWrapping="Wrap" Text="会员冻结余额:" d:LayoutOverrides="Width, Height"/>
+        <TextBlock x:Name="textBlockMemberState" FontSize="18" Grid.Column="2" Grid.Row="1" Margin="0,14.62,0,10" TextWrapping="Wrap" Text="会员状态:" d:LayoutOverrides="Width, Height"/>
+        <TextBlock x:Name="textBlockMemberRemarks" FontSize="38" Grid.Column="2" Grid.Row="2" Margin="22,6.507,0,8.113" TextWrapping="Wrap" Text="备注" Grid.RowSpan="2"/>
+        <TextBox x:Name="textBoxMemberID" Grid.Column="1" Grid.Row="0" Margin="0,0,0,0" TextWrapping="Wrap" Text=""/>
+        <TextBox x:Name="textBoxMemberName" Grid.Column="1" Grid.Row="1" Margin="0,0,0,0" TextWrapping="Wrap" Text=""/>
+        <TextBox x:Name="textBoxMemberPhoneNum" Grid.Column="1" Grid.Row="2" Margin="0,0,0,0" TextWrapping="Wrap" Text=""/>
+        <TextBox x:Name="textBoxMemberOverage" Grid.Column="1" Grid.Row="3" Margin="0,0,0,0" TextWrapping="Wrap" Text=""/>
+        <TextBox x:Name="textBoxMemberFreezeOverage" Grid.Column="3" Grid.Row="0" Margin="0,0,0,0" TextWrapping="Wrap" Text=""/>
+        <TextBox x:Name="textBoxMemberState" Grid.Column="3" Grid.Row="1" Margin="0,0,0,0" TextWrapping="Wrap" Text=""/>
+        <TextBox x:Name="textBoxMemberRemarks" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="2" Margin="0,0,0,0" TextWrapping="Wrap" Text=""/>
+    </Grid>
+</Window>
