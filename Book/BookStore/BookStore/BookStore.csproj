@@ -114,6 +114,7 @@
       <DependentUpon>MemberData.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyClass\ConnectSql.cs" />
+    <Compile Include="MyClass\DbHelperSQL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BookStore.MyClass;
 
 namespace BookStore
 {
@@ -27,7 +29,7 @@ namespace BookStore
 
         private void dataGrid_Loaded(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void setAllPanelCollapsed()
@@ -73,15 +75,52 @@ namespace BookStore
 
         private void MenuItemCheckBook_Click(object sender, RoutedEventArgs e)
         {
-            BookDetailedSuface.AddBook addBook = new BookDetailedSuface.AddBook();
-            addBook.Show();
-            this.Hide();
-            //if ((sender as MenuItem) == MenuItemAddBook)
-            //{
-            //    BookDetailedSuface.AddBook addBook = new BookDetailedSuface.AddBook();
-            //    addBook.Show();
-            //    this.Hide();
-            //}
+            if ((sender as MenuItem) == MenuItemAddBook)
+            {
+                BookDetailedSuface.AddBook addBook = new BookDetailedSuface.AddBook();
+                this.Visibility = Visibility.Hidden;
+                addBook.ShowDialog();
+                this.Visibility = Visibility.Visible;
+            }
+            else if ((sender as MenuItem) == MenuItemCheckBook)
+            {
+                if (DataGridSearch.SelectedItem is null)
+                {
+                    MessageBox.Show("请选择查看图书", "错误");
+                }
+            }else if ((sender as MenuItem) == MenuItemAlterBook)
+            {
+                if (DataGridSearch.SelectedItem is null)
+                {
+                    MessageBox.Show("请选择修改图书", "错误");
+                }
+            }else if ((sender as MenuItem) == MenuItemDeleteBook)
+            {
+                if (DataGridSearch.SelectedItem is null)
+                {
+                    MessageBox.Show("请选择删除图书", "错误");
+                }
+                else
+                {
+                    if (DataGridSearch.SelectedValue != null)
+                    {
+                        //string BookIsbn = (string) DataGridSearch.SelectedValue();
+                    }
+
+                    string sql = String.Format("Delete from BookData Where BookISBN = '{0}'", BookISBN);
+                    if (DbHelperSQL.ExecuteSql(sql) == 1)
+                    {
+                        //更新表格
+                    }
+                }
+            }
+        }
+
+        private void Button_Click_Search(object sender, RoutedEventArgs e)
+        {
+            string sql = "select * from BookData";
+            DataTable dt= DbHelperSQL.QueryTab(sql);
+            DataGridSearch.ItemsSource = dt.DefaultView;
         }
     }
 }

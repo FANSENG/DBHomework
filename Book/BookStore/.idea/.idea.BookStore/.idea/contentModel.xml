@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\15750\.Rider2019.3\config\consoles\db" t="IncludeRecursive" />
+    <e p="C:\Users\15750\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\15750\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_BookStore.-616225641.00" t="ExcludeRecursive" />
+    <e p="D:\快速访问\文档\GitHub\DBHomework\Book\BookStore" t="IncludeFlat">
+      <e p="BookStore" t="IncludeRecursive">
+        <e p="App.config" t="Include" />
+        <e p="App.xaml" t="Include" />
+        <e p="App.xaml.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="BookDetailedSuface" t="Include">
+          <e p="6ca647dcly1gbeh84twq5j22nt17bai9.jpg" t="Include" />
+          <e p="AddBook.xaml" t="Include" />
+          <e p="AddBook.xaml.cs" t="Include" />
+          <e p="AlterBookData.xaml" t="Include" />
+          <e p="AlterBookData.xaml.cs" t="Include" />
+          <e p="ViewBookData.xaml" t="Include" />
+          <e p="ViewBookData.xaml.cs" t="Include" />
+        </e>
+        <e p="BookStore.csproj" t="IncludeRecursive" />
+        <e p="MainWindow.xaml" t="Include" />
+        <e p="MainWindow.xaml.cs" t="Include" />
+        <e p="MemberDetailedSurface" t="Include">
+          <e p="AddMember.xaml" t="Include" />
+          <e p="AddMember.xaml.cs" t="Include" />
+          <e p="AlterMemberData.xaml" t="Include" />
+          <e p="AlterMemberData.xaml.cs" t="Include" />
+          <e p="MemberData.xaml" t="Include" />
+          <e p="MemberData.xaml.cs" t="Include" />
+        </e>
+        <e p="MyClass" t="Include">
+          <e p="BookData.cs" t="Include" />
+          <e p="ConnectSql.cs" t="Include" />
+          <e p="DbHelperSQL.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="App.g.cs" t="Include" />
+            <e p="BookDetailedSuface" t="Include">
+              <e p="AddBook.g.cs" t="Include" />
+              <e p="AlterBookData.g.cs" t="Include" />
+              <e p="ViewBookData.g.cs" t="Include" />
+            </e>
+            <e p="MainWindow.g.cs" t="Include" />
+            <e p="MemberDetailedSurface" t="Include">
+              <e p="AddMember.g.cs" t="Include" />
+              <e p="AlterMemberData.g.cs" t="Include" />
+              <e p="MemberData.g.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+          <e p="Settings.Designer.cs" t="Include" />
+          <e p="Settings.settings" t="Include" />
+        </e>
+        <e p="WelcomeBackGr.jpg" t="Include" />
+        <e p="WelcomeText.png" t="Include" />
+      </e>
+      <e p="BookStore.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>

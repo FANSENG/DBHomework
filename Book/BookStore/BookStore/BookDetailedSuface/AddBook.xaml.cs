@@ -25,6 +25,7 @@ namespace BookStore.BookDetailedSuface
     public partial class AddBook : Window
     {
         BookData book = new BookData();
+        private string imagePath;
         public AddBook()
         {
             InitializeComponent();
@@ -40,9 +41,13 @@ namespace BookStore.BookDetailedSuface
             return byData;
         }
 
-        public bool saveToSql()
+        public bool save()
         {
-            return true;
+            string sql = String.Format(
+                "INSERT INTO BookData(BookISBN, BookName, BookAuthor, BookCategory,BookPicture, PictureFormat,BookNum,BrandNewBookNum,BookPrice,BookSummary,Remarks) VALUES ('{0}', '{1}', '{2}', '{3}', @image, '{4}', {5}, {6}, {7}, @summary, '{8}')"
+            ,book.BookISBN,book.BookName,book.BookAuthor,book.BookCategory,book.PictureFormat,book.BookNum,book.BrandNewBookNum,book.BookPrice,book.Remarks);
+            MessageBox.Show(sql);
+            return (DbHelperSQL.ExecuteSqlInsertImgAndSummary(sql, book.BookPicture, book.BookSummary)) == 1 ? true:false;
         }
 
         public void button_click(object sender, RoutedEventArgs e)
@@ -61,11 +66,13 @@ namespace BookStore.BookDetailedSuface
             else if(sender as Button == buttonBookPicture)
             {
                 WinForm.OpenFileDialog openFile = new WinForm.OpenFileDialog();
-                openFile.Filter = "Image Files (*.bmp, *.png, *.jpg)|*.bmp;*.png;*.jpg | All Files | *.*";
                 if (openFile.ShowDialog() == WinForm.DialogResult.OK)
                 {
                     imageBook.Source = new BitmapImage(new Uri(openFile.FileName));
-                    book.BookPicture = GetData(openFile.FileName);
+                    FileStream fs = File.OpenRead(openFile.FileName);
+                    book.BookPicture = new Byte[(int)fs.Length];
+                    fs.Read(book.BookPicture, 0, (int) fs.Length);
+                    fs.Close();
                     string[] str = openFile.FileName.Split('.');
                     book.PictureFormat = str[str.Length - 1];
                 }
@@ -80,9 +87,12 @@ namespace BookStore.BookDetailedSuface
                 book.BookPrice = Convert.ToDouble(TextBoxBookPrice.Text);
                 book.BookNum = 0;
                 book.BrandNewBookNum = 0;
-
-                
-
+                if(save())
+                    MessageBox.Show("成功","标题");
+                else
+                {
+                    MessageBox.Show("失败","标题");
+                }
             }
         }
     }

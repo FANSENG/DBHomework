@@ -38,7 +38,7 @@
                     <TextBlock x:Name="TextBlockTodaySell" DockPanel.Dock="Top" Height="292" TextWrapping="Wrap" Text="最近销售" VerticalAlignment="Center" FontSize="24" HorizontalAlignment="Center"/>
                     <DataGrid x:Name="DataGridWelcomeSell" Height="250.8" VerticalAlignment="Top" Width="326.8" Margin="0,-250.8,0,0" RenderTransformOrigin="0.5,0.5" ItemsSource="{Binding}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="书名" Width="82.6" Binding="{Binding BookName}" />
+                            <DataGridTextColumn Header="书名" Width="82.6" Binding="{Binding BookName}"  />
                             <DataGridTextColumn Header="数量" Width="82.6" Binding="{Binding Count}" />
                             <DataGridTextColumn Header="售价" Width="82.6" Binding="{Binding Price}" />
                             <DataGridTextColumn Header="时间" Width="82.6" Binding="{Binding SellDate}" />
@@ -291,14 +291,14 @@
                     <ComboBoxItem Content="医学"/>
                     <ComboBoxItem Content="天文"/>
                 </ComboBox>
-                <Button x:Name="ButtonSearchBookSearch" Content="搜索" Width="75" Margin="10,0,0,0"/>
+                <Button x:Name="ButtonSearchBookSearch" Content="搜索" Width="75" Margin="10,0,0,0" Click="Button_Click_Search"/>
             </StackPanel>
             <!--双击查看详情信息-->
             <DataGrid x:Name="DataGridSearch" Width="642.4" Margin="0,5,0,0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="书名" Width="107.36" Binding="{Binding Path=BookName}"/>
                     <DataGridTextColumn Header="作者" Width="107.36" Binding="{Binding Path=BookAuthor}"/>
-                    <DataGridTextColumn Header="ISBN" Width="107.36" Binding="{Binding Path=BookISBN}"/>
+                    <DataGridTextColumn x:Name="BookISBN" Header="ISBN" Width="107.36" Binding="{Binding Path=BookISBN}"/>
                     <DataGridTextColumn Header="价格" Width="107.36" Binding="{Binding Path=BookPrice}"/>
                     <DataGridTextColumn Header="库存数量" Width="107.36" Binding="{Binding Path=BookCount}"/>
                     <DataGridTextColumn Header="类别" Width="107.36" Binding="{Binding Path=BookCount}"/>
