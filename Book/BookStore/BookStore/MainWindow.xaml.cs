@@ -63,10 +63,10 @@ namespace BookStore
             {
                 PurchaseManagePanel.Visibility = Visibility.Visible;
             }
-            else if (click == buttonFinanceManage)
-            {
-                FinanceManagePanel.Visibility = Visibility.Visible;
-            }
+            //else if (click == buttonFinanceManage)
+            //{
+            //    FinanceManagePanel.Visibility = Visibility.Visible;
+            //}
             else if (click == ButtonSearchBook)
             {
                 SearchBookPanel.Visibility = Visibility.Visible;

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\15750\.Rider2019.3\config\consoles\db" t="IncludeRecursive" />
+    <e p="C:\Users\15750\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\15750\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_LibraryManager.1892218394.00" t="ExcludeRecursive" />
+    <e p="D:\快速访问\Desktop\book_management_system" t="IncludeFlat">
+      <e p="LibraryManager" t="IncludeRecursive">
+        <e p="AlterPwdForm.cs" t="Include" />
+        <e p="AlterPwdForm.Designer.cs" t="Include" />
+        <e p="AlterPwdForm.resx" t="Include" />
+        <e p="App.config" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="BorrowBooks.cs" t="Include" />
+        <e p="BorrowBooks.Designer.cs" t="Include" />
+        <e p="BorrowBooks.resx" t="Include" />
+        <e p="FindBookForm.cs" t="Include" />
+        <e p="FindBookForm.Designer.cs" t="Include" />
+        <e p="FindBookForm.resx" t="Include" />
+        <e p="FindRecordForm.cs" t="Include" />
+        <e p="FindRecordForm.Designer.cs" t="Include" />
+        <e p="FindRecordForm.resx" t="Include" />
+        <e p="FindUserDetailForm.cs" t="Include" />
+        <e p="FindUserDetailForm.Designer.cs" t="Include" />
+        <e p="FindUserDetailForm.resx" t="Include" />
+        <e p="InsertNewBook.cs" t="Include" />
+        <e p="InsertNewBook.Designer.cs" t="Include" />
+        <e p="InsertNewBook.resx" t="Include" />
+        <e p="library_128px_1233369_easyicon.net.ico" t="Include" />
+        <e p="LibraryManager.csproj" t="IncludeRecursive" />
+        <e p="LockUserForm.cs" t="Include" />
+        <e p="LockUserForm.Designer.cs" t="Include" />
+        <e p="LockUserForm.resx" t="Include" />
+        <e p="LoginForm.cs" t="Include" />
+        <e p="LoginForm.Designer.cs" t="Include" />
+        <e p="LoginForm.resx" t="Include" />
+        <e p="MainForm.cs" t="Include" />
+        <e p="MainForm.Designer.cs" t="Include" />
+        <e p="MainForm.resx" t="Include" />
+        <e p="MyDictionary.cs" t="Include" />
+        <e p="MyException.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+          <e p="Settings.Designer.cs" t="Include" />
+          <e p="Settings.settings" t="Include" />
+        </e>
+        <e p="ReturnBooks.cs" t="Include" />
+        <e p="ReturnBooks.Designer.cs" t="Include" />
+        <e p="ReturnBooks.resx" t="Include" />
+        <e p="SqlHelper.cs" t="Include" />
+        <e p="UpdateIndivForm.cs" t="Include" />
+        <e p="UpdateIndivForm.Designer.cs" t="Include" />
+        <e p="UpdateIndivForm.resx" t="Include" />
+        <e p="UserDetailForm.cs" t="Include" />
+        <e p="UserDetailForm.Designer.cs" t="Include" />
+        <e p="UserDetailForm.resx" t="Include" />
+      </e>
+      <e p="LibraryManager.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
