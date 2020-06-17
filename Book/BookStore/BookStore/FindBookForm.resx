@@ -193,26 +193,6 @@
         gg==
 </value>
   </data>
-  <data name="ButtonFirstPage.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAMlSURBVFhH7ZZdKLNhGMffUovNVyOUlZRIOJAipawQhRzg
-        xEhaUeTEcqIkpZzIgTVOWEtpaXMiOVhzgFo7kNRSUsi3CPlIbOyv69795ON5eJ/NW+ptv6On+7pa//u+
-        /v/73h/8MmEBYQH/j4Dn52f+9TVSPT8W8PDwgNnZWeh0OmxubvLVj9zd3WF6ehotLS3Y2dnhqwFCFkC7
-        cblcqK+vh1KpRElJCba3t3k1gM/nw/LyMmpqahAVFYXy8nLs7+/zaoCQBNAuDAYDEhISkJ6ejtHRUVxc
-        XPAq4Pf7sbW1ha6uLsTHxyMzMxPj4+O4urriHW8EJeDy8hJGoxEZGRnsh7u7u0W7Pj8/x8jICNLS0pjA
-        3t5e7O7u8qoYWQIeHx8xPz/PjpmOsra2FisrK+yIBcgLNpsNhYWFbCQNDQ1wu91/Nee3Al5eXrC2toam
-        piaoVCrk5+djZmYG9/f3vEPshaKiItjtdiZIDl8KILP09fUhKSkJqampGBoawunpKa8GeO8FOnI6ehpB
-        MIgEkPLJyUlkZ2cjJiYGer0eHo+HGUuAYmUymZgX4uLimNnIdO975CISYDabERkZibKyMjidTni9Xl55
-        Y2xsDAqFAtXV1SIvBItIAEUqIiICbW1toktDYHBwkPXQzg8ODvhqaIgE0Ax7enqgVqslM04cHx+js7OT
-        HT9lnMYhlXE5SJqQnL26uoq6ujoWu+LiYszNzX1wNo1maWkJVVVVbGSlpaVYWFhgkQ0GSQECFDer1YqC
-        ggIWscbGRlG2b29vYbFYkJeXx6La3NyM9fV1FmE5fCtA4OzsDMPDw9BoNEhMTJS83Y6OjjAwMICUlBQk
-        Jyejv79flj9kCSAoYvTatbe3IzY2VvJ+p56NjQ20trYiOjoaOTk5mJqaws3NDe8QI1uAAM2e4llZWfnl
-        7J+enrC4uAitVst6Kioq4HA4JCMdtAABmj3dGbm5uWz2tOuTkxNeDXB9fY2JiQlkZWWxS62jo0OUqJAF
-        CBweHrJ50yNE74YUe3t7zDeUps9/Wn4sgKBUkBe+e/notqSez+n4JwJ+QlhAWMAvCwBeAVz7yacFdpI2
-        AAAAAElFTkSuQmCC
-</value>
-  </data>
   <data name="ButtonPreviousPage.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -237,22 +217,6 @@
         3/fRNI2o9Ls2BSBTJI7j4Ha7iWqvtTnAZMMwcLlcMAyDqPq9dgMgUyRBEKBtW1H5WbsCkKdI7ve7qP5Z
         /xuANQK2j5D1N2RdiNiWYtbNiHU7Zj2QsB3JWA+lrMdytsaEtTVja07pNf9dew58AJbt+RRU/M25AAAA
         AElFTkSuQmCC
-</value>
-  </data>
-  <data name="ButtonLastPage.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJVSURBVFhH7ZbZSnJRGIYVyaGb8FBRyeoqFHFAK0UkIuge
-        Osh5Nqdjj70Tk8ShuoMG0srpzFl4Yy0Wfz9sNfc26v+h58z1gvvZa639fZ8IP8yvwL8nUCqVcH5+jvv7
-        e7aymPl8jkKhgHw+j8FgwFb5wxEgfygSiWAwGPDw8MBWuYzHY1gsFkgkElxcXGA0GrGEHxyBfr+P09NT
-        iMViGI1GPD4+soTL7e0t9vf3IZVK4fP5BEksvAO9Xg8nJydUwmQy4enpiSVcbm5usLu7SyUCgQDdGT4s
-        vYTdbhfHx8dUwmw24/n5mSVc6vU69Ho9lQiFQrwklgoQOp0OPB4PlbBarWg2myzhUqvVsLOzA5lMhkgk
-        gslkwpLVrBQgEAm3200lbDYbWq0WS7hUq1XodDoqEYvF1pL4VIDQbrfhcrmohN1uXylRqVSg1Wohl8uR
-        SCQ+lVhLgPD29oajoyMqcXBwgJeXF5Zwub6+hkajgUKhQCqVwnQ6ZQmXtQUIr6+vODw8pBJEhvxeRrlc
-        hlqtphLpdHqpBC8BAnlzh8NBJcixkJ1ZxtXVFVQqFba3t5HNZjGbzVjyAW8BApEg9YFUzLOzs5VbTEq7
-        UqmkO1EsFtnqB/+fwN9H4HQ61z6CTCazUPRbLuHl5eXml1DIZ0hqQTKZXHlEawkILUTxeHzzQiS0FEej
-        0c1LsdBmFA6HN29GfNpxo9H4046DweDm7ZjvQLK3t0cf7vf7Nx9I+Ixkd3d3dCTb2tqC1+v9mpFM6FA6
-        HA5Zwg+OAN+xPJfLfe1Y/t38CvywAPAO622gZ/M+LlAAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="ButtonSearch.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -316,6 +280,30 @@
         8MC51KQK8F36YQCiXxB8hAOjTmdNAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="图书序列号.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="书名.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="作者.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="出版社.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="出版日期.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ISBN.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="价格.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="库存数量.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="图书序列号.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

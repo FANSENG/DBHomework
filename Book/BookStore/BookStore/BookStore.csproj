@@ -66,6 +66,18 @@
     <Compile Include="BorrowBooks.Designer.cs">
       <DependentUpon>BorrowBooks.cs</DependentUpon>
     </Compile>
+    <Compile Include="DeleteBookForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeleteBookForm.Designer.cs">
+      <DependentUpon>DeleteBookForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeleteUserForm.Designer.cs">
+      <DependentUpon>DeleteUserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FindBookForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +160,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BorrowBooks.resx">
       <DependentUpon>BorrowBooks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeleteBookForm.resx">
+      <DependentUpon>DeleteBookForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeleteUserForm.resx">
+      <DependentUpon>DeleteUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FindBookForm.resx">
       <DependentUpon>FindBookForm.cs</DependentUpon>

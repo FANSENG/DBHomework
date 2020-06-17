@@ -35,10 +35,8 @@
             this.ButtonRefresh = new System.Windows.Forms.ToolStripButton();
             this.ButtonDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.ButtonFirstPage = new System.Windows.Forms.ToolStripButton();
             this.ButtonPreviousPage = new System.Windows.Forms.ToolStripButton();
             this.ButtonNextPage = new System.Windows.Forms.ToolStripButton();
-            this.ButtonLastPage = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ButtonSearch = new System.Windows.Forms.ToolStripButton();
             this.ButtonBookName = new System.Windows.Forms.ToolStripTextBox();
@@ -67,10 +65,8 @@
             this.ButtonRefresh,
             this.ButtonDelete,
             this.toolStripSeparator1,
-            this.ButtonFirstPage,
             this.ButtonPreviousPage,
             this.ButtonNextPage,
-            this.ButtonLastPage,
             this.toolStripSeparator2,
             this.ButtonSearch,
             this.ButtonBookName,
@@ -130,17 +126,6 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
             // 
-            // ButtonFirstPage
-            // 
-            this.ButtonFirstPage.AutoSize = false;
-            this.ButtonFirstPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ButtonFirstPage.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFirstPage.Image")));
-            this.ButtonFirstPage.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonFirstPage.Name = "ButtonFirstPage";
-            this.ButtonFirstPage.Size = new System.Drawing.Size(33, 32);
-            this.ButtonFirstPage.Text = "跳转至第一页";
-            this.ButtonFirstPage.Click += new System.EventHandler(this.ButtonFirstPage_Click);
-            // 
             // ButtonPreviousPage
             // 
             this.ButtonPreviousPage.AutoSize = false;
@@ -162,17 +147,6 @@
             this.ButtonNextPage.Size = new System.Drawing.Size(33, 32);
             this.ButtonNextPage.Text = "跳转至下一页";
             this.ButtonNextPage.Click += new System.EventHandler(this.ButtonNextPage_Click);
-            // 
-            // ButtonLastPage
-            // 
-            this.ButtonLastPage.AutoSize = false;
-            this.ButtonLastPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ButtonLastPage.Image = ((System.Drawing.Image)(resources.GetObject("ButtonLastPage.Image")));
-            this.ButtonLastPage.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonLastPage.Name = "ButtonLastPage";
-            this.ButtonLastPage.Size = new System.Drawing.Size(33, 32);
-            this.ButtonLastPage.Text = "跳至最后一页";
-            this.ButtonLastPage.Click += new System.EventHandler(this.ButtonLastPage_Click);
             // 
             // toolStripSeparator2
             // 
@@ -350,8 +324,6 @@
         #endregion
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton ButtonSave;
-        private System.Windows.Forms.ToolStripButton ButtonFirstPage;
-        private System.Windows.Forms.ToolStripButton ButtonLastPage;
         private System.Windows.Forms.ToolStripButton ButtonPreviousPage;
         private System.Windows.Forms.ToolStripButton ButtonNextPage;
         private System.Windows.Forms.ToolStripButton ButtonRefresh;

@@ -237,41 +237,6 @@ namespace LibraryManager
             GetData();
             MessageBox.Show("保存成功");
             changed = false;
-
-            //// 若绑定数据源则用dgv_list.DataSource as DataTable;
-            //// 未绑定则用DgvToTable()强制转换
-            //// = DgvToTable(dgv_list);
-            //DataTable dt=dgv_list.DataSource as DataTable;
-            //// 完成adapter的UpdateCommand
-            //string str = System.Configuration.ConfigurationManager.ConnectionStrings["library"].ConnectionString;
-            //using (SqlConnection conn = new SqlConnection(str))
-            //{
-
-            //    SqlDataAdapter adapter = new SqlDataAdapter();
-
-            //    // 构造UpdateCommand
-            //    string update = "update books set bName=@bName, bAuthor=@bAuthor,bPubCom=@bPubCom,bPubDat=@bPubDat,ISBN=@ISBN,bPrice=@bPrice,bTag=@bTag where bNum=@bNum";
-            //    SqlCommand updateCmd = new SqlCommand(update, conn);
-            //    updateCmd.Parameters.Add("@bName", SqlDbType.NVarChar , 60, "bName");
-            //    updateCmd.Parameters.Add("@bAuthor", SqlDbType.NVarChar, 60, "bAuthor");
-            //    updateCmd.Parameters.Add("@bPubCom", SqlDbType.NVarChar, 50, "bPubCom");
-            //    updateCmd.Parameters.Add("@bPubDat", SqlDbType.NVarChar, 20, "bPubDat");
-            //    updateCmd.Parameters.Add("@ISBN", SqlDbType.NVarChar, 50, "ISBN");
-            //    updateCmd.Parameters.Add("@bPrice", SqlDbType.NVarChar, 10, "bPrice");
-            //    updateCmd.Parameters.Add("@bTag", SqlDbType.NVarChar, 10, "bTag");
-            //    updateCmd.Parameters.Add("@bNum", SqlDbType.NVarChar, 10, "bNum");
-            //    adapter.UpdateCommand = updateCmd;
-
-            //    // 执行
-            //    conn.Open();
-            //    adapter.Update(dt);
-            //}
-
-            //// 刷新数据
-            //GetData();
-            //MessageBox.Show("保存成功");
-
-            //MessageBox.Show("功能暂未开放");
         }
 
         /// <summary>
@@ -333,13 +298,21 @@ namespace LibraryManager
         {
             string select = dataGridView.Rows[dataGridView.CurrentRow.Index].Cells[0].Value.ToString();
             string sql = String.Format("select bImage from books where bNum = '{0}'", select);
-            byte[] image = (byte[])SqlHelper.ExecuteScalar(sql);
-            imageForm im = new imageForm();
-            if(!im.setImage(image))
-                MessageBox.Show("图片显示错误");
-            else
+
+            try
             {
-                im.ShowDialog();
+                byte[] image = (byte[])SqlHelper.ExecuteScalar(sql);
+                imageForm im = new imageForm();
+                if (!im.setImage(image))
+                    MessageBox.Show("图片显示错误");
+                else
+                {
+                    im.ShowDialog();
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("此图书无照片", "照片不存在");
             }
         }
 
@@ -352,10 +325,17 @@ namespace LibraryManager
         {
             string select = dataGridView.Rows[dataGridView.CurrentRow.Index].Cells[0].Value.ToString();
             string sql = String.Format("select bFile from books where bNum = '{0}'", select);
-            byte[] file = (byte[])SqlHelper.ExecuteScalar(sql);
-            UTF8Encoding data = new UTF8Encoding(true);
-            Text = data.GetString(file);
-            MessageBox.Show(Text,"图书简介");
+            try
+            {
+                byte[] file = (byte[])SqlHelper.ExecuteScalar(sql);
+                UTF8Encoding data = new UTF8Encoding(true);
+                Text = data.GetString(file);
+                MessageBox.Show(Text, "图书简介");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("此图书无简介文件","简介不存在");
+            }
         }
 
     }

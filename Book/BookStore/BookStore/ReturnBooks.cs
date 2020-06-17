@@ -33,6 +33,15 @@ namespace LibraryManager
             }
         }
 
+        public void LoadData()
+        {
+            string sql = "select ID,uId,bName,bNum,bPrice,borrowDate,returnDate,Tag from borrow";
+            MyDictionary dic = new MyDictionary();
+            dic.Add("@uId", TextBoxUserID.Text.Trim());
+            DataTable dt = SqlHelper.GetList(sql, dic);
+            dataGridView.DataSource = dt;
+        }
+
         /// <summary>
         /// 显示租借清单
         /// </summary>
@@ -87,6 +96,7 @@ namespace LibraryManager
         /// <param name="e"></param>
         private void ReturnBooks_Load(object sender, EventArgs e)
         {
+            LoadData();
             // 文本框锁定
             TextBoxBorrowID.ReadOnly = true;
             TextBoxBookName.ReadOnly = true;

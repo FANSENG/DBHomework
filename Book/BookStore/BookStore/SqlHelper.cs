@@ -33,9 +33,7 @@ namespace LibraryManager
             }
             return isExists;
         }
-
         // 执行sql操作   返回是否存在书籍
-
         public static bool IsBookExistsWithNum(string bNum)
         {
             bool isExists = false;
@@ -55,6 +53,67 @@ namespace LibraryManager
             return isExists;
         }
 
+
+        // 删除用户
+        public static void DeleteUser(string uId)
+        {
+            using (SqlConnection conn = GetConn())
+            {
+                string sql = "delete from users where uId =@uId";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.Add(new SqlParameter("@uId", uId));
+                conn.Open();
+                cmd.ExecuteScalar();
+            }
+        }
+
+        // 删除图书
+        public static void DeleteBook(string bNum)
+        {
+            using (SqlConnection conn = GetConn())
+            {
+                string sql = "delete from books where bNum =@bNum";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.Add(new SqlParameter("@bNum", bNum));
+                conn.Open();
+                cmd.ExecuteScalar();
+            }
+        }
+
+        // 返回此用户是否存在租借
+        public static bool IsUserBorrowExists(string uId)
+        {
+            using (SqlConnection conn = GetConn())
+            {
+                string sql = "select count(*) from borrow where uId =@uId";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.Add(new SqlParameter("@uId", uId));
+                conn.Open();
+                int obj = Convert.ToInt32(cmd.ExecuteScalar());// 返回受影响的行数
+                if (obj > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool IsBookBorrowExists(string bNum)
+        {
+            using (SqlConnection conn = GetConn())
+            {
+                string sql = "select count(*) from borrow where bNum =@bNum";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.Add(new SqlParameter("@bNum", bNum));
+                conn.Open();
+                int obj = Convert.ToInt32(cmd.ExecuteScalar());// 返回受影响的行数
+                if (obj > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         // 执行 ...   返回受影响行数 
         private static int ExecuteNonQuery(string sql, CommandType type, params SqlParameter[] ps)

@@ -92,7 +92,6 @@ namespace LibraryManager
                     MessageBox.Show("该书籍库存量为零！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-
                 sql = "select uBlance from users where uId=@uId";
                 MyDictionary dic4 = new MyDictionary();
                 dic4.Add("@uId", TextBoxUserID.Text.Trim());

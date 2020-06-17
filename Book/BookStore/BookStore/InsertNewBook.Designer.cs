@@ -196,7 +196,7 @@
             this.DeleteBookpanel.Controls.Add(this.TextBoxDeleteBook);
             this.DeleteBookpanel.Controls.Add(this.label9);
             this.DeleteBookpanel.Controls.Add(this.ButtonDelete);
-            this.DeleteBookpanel.Location = new System.Drawing.Point(53, 36);
+            this.DeleteBookpanel.Location = new System.Drawing.Point(34, 56);
             this.DeleteBookpanel.Margin = new System.Windows.Forms.Padding(4);
             this.DeleteBookpanel.Name = "DeleteBookpanel";
             this.DeleteBookpanel.Size = new System.Drawing.Size(649, 339);

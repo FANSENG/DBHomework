@@ -48,3 +48,5 @@ D:\快速访问\文档\GitHub\DBHomework\Book\BookStore\BookStore\obj\x86\Debug\
 D:\快速访问\文档\GitHub\DBHomework\Book\BookStore\BookStore\obj\x86\Debug\BookStore.csproj.CopyComplete
 D:\快速访问\文档\GitHub\DBHomework\Book\BookStore\BookStore\obj\x86\Debug\LibraryManager.exe
 D:\快速访问\文档\GitHub\DBHomework\Book\BookStore\BookStore\obj\x86\Debug\LibraryManager.pdb
+D:\快速访问\文档\GitHub\DBHomework\Book\BookStore\BookStore\obj\x86\Debug\LibraryManager.DeleteBookForm.resources
+D:\快速访问\文档\GitHub\DBHomework\Book\BookStore\BookStore\obj\x86\Debug\LibraryManager.DeleteUserForm.resources

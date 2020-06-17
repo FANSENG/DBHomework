@@ -106,12 +106,15 @@ namespace LibraryManager
         /// <param name="e"></param>
         private void ButtonDeleteUser_Click(object sender, EventArgs e)
         {
-            UpdateIndivForm deleteForm = new UpdateIndivForm();
-            deleteForm.Text = "删除用户";
-            deleteForm.P = "2";
-            deleteForm.Id = Id;
-            deleteForm._Tag = _Tag;
-            deleteForm.ShowDialog();
+            //UpdateIndivForm deleteForm = new UpdateIndivForm();
+            //deleteForm.Text = "删除用户";
+            //deleteForm.P = "2";
+            //deleteForm.Id = Id;
+            //deleteForm._Tag = _Tag;
+            //deleteForm.ShowDialog();
+
+            DeleteUserForm duf = new DeleteUserForm();
+            duf.ShowDialog();
         }
 
         /// <summary>
@@ -126,16 +129,19 @@ namespace LibraryManager
         }
 
         /// <summary>
-        /// 书籍注销
+        /// 书籍删除
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ButtonLogoutBook_Click(object sender, EventArgs e)
         {
-            InsertNewBookForm iNB = new InsertNewBookForm();
-            iNB.P = "1";
-            iNB.Text = "注销书籍";
-            iNB.ShowDialog();
+            //InsertNewBookForm iNB = new InsertNewBookForm();
+            //iNB.P = "1";
+            //iNB.Text = "注销书籍";
+            //iNB.ShowDialog();
+            DeleteBookForm dbf = new DeleteBookForm();
+            dbf.ShowDialog();
+
         }
 
         /// <summary>
